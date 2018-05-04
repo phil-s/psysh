@@ -49,6 +49,7 @@ class Configuration
         'manualDbFile',
         'pager',
         'prompt',
+        'requireNewlineAfterBlocks',
         'requireSemicolons',
         'runtimeDir',
         'startupMessage',
@@ -76,7 +77,8 @@ class Configuration
     private $useBracketedPaste;
     private $hasPcntl;
     private $usePcntl;
-    private $newCommands       = [];
+    private $newCommands = [];
+    private $requireNewlineAfterBlocks = false;
     private $requireSemicolons = false;
     private $useUnicode;
     private $useTabCompletion;
@@ -639,6 +641,34 @@ class Configuration
     public function usePcntl()
     {
         return isset($this->usePcntl) ? ($this->hasPcntl && $this->usePcntl) : $this->hasPcntl;
+    }
+
+    /**
+     * Enable or disable requiring an extra newline after all blocks.
+     *
+     * @see self::requireNewlineAfterBlocks()
+     *
+     * @param bool $requireNewlineAfterBlocks
+     */
+    public function setRequireNewlineAfterBlocks($requireNewlineAfterBlocks)
+    {
+        $this->requireNewlineAfterBlocks = (bool) $requireNewlineAfterBlocks;
+    }
+
+    /**
+     * Check whether to require an extra newline after all blocks.
+     *
+     * PsySH will execute input on enter as long as the line is a valid command.
+     * This means an `if` statement won't wait for an `else` if you hit enter
+     * after the closing bracket. With `requireNewlineAfterBlocks` set to true,
+     * you will have to hit enter *twice* to execute input if the current
+     * line ends with a closing bracket.
+     *
+     * @return bool
+     */
+    public function requireNewlineAfterBlocks()
+    {
+        return $this->requireNewlineAfterBlocks;
     }
 
     /**

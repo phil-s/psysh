@@ -642,6 +642,8 @@ class Shell extends Application
             if (substr(rtrim($code), -1) === '\\') {
                 $this->codeBufferOpen = true;
                 $code = substr(rtrim($code), 0, -1);
+            } elseif ($this->config->requireNewlineAfterBlocks() && substr(rtrim($code), -1) === '}') {
+                $this->codeBufferOpen = true;
             } else {
                 $this->codeBufferOpen = false;
             }
