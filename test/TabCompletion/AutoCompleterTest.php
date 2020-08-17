@@ -17,17 +17,16 @@ use Psy\Configuration;
 use Psy\Context;
 use Psy\ContextAware;
 use Psy\TabCompletion\Matcher;
+use Psy\TabCompletion\AutoCompleter;
 
 class AutoCompleterTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @param string $line
-     * @param array  $mustContain
-     * @param array  $mustNotContain
-     * @dataProvider classesInput
+     * Generic set-up for testing Matchers.
+     *
+     * @return array [AutoCompleter, Context]
      */
-    public function testClassesCompletion($line, $mustContain, $mustNotContain)
-    {
+    private function setUp() {
         $context = new Context();
 
         $commands = [
@@ -56,6 +55,19 @@ class AutoCompleterTest extends \PHPUnit\Framework\TestCase
             }
             $tabCompletion->addMatcher($matcher);
         }
+
+        return [$tabCompletion, $context];
+    }
+
+    /**
+     * @param string $line
+     * @param array  $mustContain
+     * @param array  $mustNotContain
+     * @dataProvider classesInput
+     */
+    public function testClassesCompletion($line, $mustContain, $mustNotContain)
+    {
+        [$tabCompletion, $context] = $this->setUp();
 
         $context->setAll(['foo' => 12, 'bar' => new \DOMDocument()]);
 
