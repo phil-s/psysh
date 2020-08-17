@@ -35,16 +35,16 @@ class AutoCompleterTest extends \PHPUnit\Framework\TestCase
         ];
 
         $matchers = [
-            new Matcher\VariablesMatcher(),
-            new Matcher\ClassNamesMatcher(),
-            new Matcher\ConstantsMatcher(),
-            new Matcher\FunctionsMatcher(),
-            new Matcher\ObjectMethodsMatcher(),
-            new Matcher\ObjectAttributesMatcher(),
-            new Matcher\KeywordsMatcher(),
             new Matcher\ClassAttributesMatcher(),
             new Matcher\ClassMethodsMatcher(),
+            new Matcher\ClassNamesMatcher(),
             new Matcher\CommandsMatcher($commands),
+            new Matcher\ConstantsMatcher(),
+            new Matcher\FunctionsMatcher(),
+            new Matcher\KeywordsMatcher(),
+            new Matcher\ObjectAttributesMatcher(),
+            new Matcher\ObjectMethodsMatcher(),
+            new Matcher\VariablesMatcher(),
         ];
 
         $config = new Configuration();
