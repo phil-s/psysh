@@ -36,13 +36,18 @@ class AutoCompleterTest extends \PHPUnit\Framework\TestCase
 
         $matchers = [
             new Matcher\ClassAttributesMatcher(),
+            new Matcher\ClassMethodDefaultParametersMatcher(),
             new Matcher\ClassMethodsMatcher(),
             new Matcher\ClassNamesMatcher(),
             new Matcher\CommandsMatcher($commands),
             new Matcher\ConstantsMatcher(),
+            new Matcher\FunctionDefaultParametersMatcher(),
             new Matcher\FunctionsMatcher(),
             new Matcher\KeywordsMatcher(),
+            new Matcher\MongoClientMatcher(),
+            new Matcher\MongoDatabaseMatcher(),
             new Matcher\ObjectAttributesMatcher(),
+            new Matcher\ObjectMethodDefaultParametersMatcher(),
             new Matcher\ObjectMethodsMatcher(),
             new Matcher\VariablesMatcher(),
         ];
